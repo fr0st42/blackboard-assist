@@ -18,3 +18,5 @@ router.get('/', authMiddleware, async (request, response) => {
 	if (error) return handleError(response, error)
 	response.json(terms)
 })
+
+module.exports = router

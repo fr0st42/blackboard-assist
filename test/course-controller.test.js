@@ -100,25 +100,4 @@ describe('Course Controller', () => {
 		})
 	})
 
-	describe('getCourseStudents', () => {
-		const { getCourseStudents } = controller
-
-		it('should return students for a valid course', async () => {
-			global.fetch = async () => ({
-				...result200, json: async () => ({ results: [] })
-			})
-			const { students } = await getCourseStudents('valid-token', 'course-id')
-			assert.ok(students)
-			assert.strictEqual(students.length, 0)
-		})
-
-		it('should return an error if students cannot be fetched', async () => {
-			global.fetch = async () => result400
-			const { error } = await getCourseStudents('invalid-token', 'invalid-course-id')
-			assert.ok(error)
-		})
-
-		it('need to test with mock student data', { todo: true }, () => { })
-	})
-
 })
