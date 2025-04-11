@@ -5,8 +5,8 @@ const getCourses = async (accessToken, termId) => {
 	const params = { expand: 'course', fields: 'course,courseRoleId' }
 	const queryString = new URLSearchParams(params).toString()
 	const url = `${apiUrl}/v1/users/me/courses?${queryString}`
-	const options = { headers: { 'Authorization': `Bearer ${accessToken}` } }
-	
+	const options = { headers: { Authorization: `Bearer ${accessToken}` } }
+
 	const result = await fetch(url, options)
 	const { ok, status } = result
 

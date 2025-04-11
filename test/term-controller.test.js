@@ -40,7 +40,6 @@ const mockTerms = [
 
 
 describe('Term Controller', () => {
-
 	after(restoreFetch)
 
 	it('should return all terms for a valid access token without description', async () => {
@@ -73,5 +72,4 @@ describe('Term Controller', () => {
 		assert.strictEqual(error.status, 400)
 		assert.strictEqual(error.message, 'Could not fetch terms')
 	})
-
 })

@@ -13,7 +13,6 @@ const result400 = { ok: false, status: 400 }
 
 
 describe('Student Controller', () => {
-
 	after(restoreFetch)
 
 	describe('getStudents', () => {
@@ -36,5 +35,4 @@ describe('Student Controller', () => {
 
 		it('need to test with mock student data', { todo: true }, () => { })
 	})
-
 })

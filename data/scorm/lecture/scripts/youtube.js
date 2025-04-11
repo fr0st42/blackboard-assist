@@ -13,16 +13,16 @@ const loadYouTubeAPI = () => {
 
 		if (!document.querySelector('script[src="https://www.youtube.com/iframe_api"]')) {
 			const script = document.createElement('script')
-			script.src = "https://www.youtube.com/iframe_api"
+			script.src = 'https://www.youtube.com/iframe_api'
 			document.head.appendChild(script)
 		}
 	})
 }
-	
+
 const formatTime = time => {
-    const minutes = Math.floor(time / 60)
-    const seconds = Math.floor(time % 60)
-    return `${minutes}:${seconds.toString().padStart(2, '0')}`
+	const minutes = Math.floor(time / 60)
+	const seconds = Math.floor(time % 60)
+	return `${minutes}:${seconds.toString().padStart(2, '0')}`
 }
 
 export const createGetTimeValues = durationAdjustment => player => {
@@ -30,8 +30,8 @@ export const createGetTimeValues = durationAdjustment => player => {
 	const durationRaw = player.getDuration()
 
 	const currentTimeFormatted = formatTime(currentTimeRaw)
-	//const durationFormatted = formatTime(durationRaw)
-	
+	// const durationFormatted = formatTime(durationRaw)
+
 	const adjustedDurationRaw = durationRaw * durationAdjustment
 	const uncappedPercent = currentTimeRaw / adjustedDurationRaw
 	const percent = Math.min(1, uncappedPercent)
@@ -64,7 +64,7 @@ const initializePlayer = (iframe, settings) => {
 			const title = videoTitle || 'Unknown video'
 			const player = target
 
-			const state = { '1': 'playing', '2': 'paused' }[data]
+			const state = { 1: 'playing', 2: 'paused' }[data]
 			if (!state) return
 
 			const { currentTimeFormatted, adjustedDurationRaw, percent } = getTimeValues(player)
@@ -73,14 +73,14 @@ const initializePlayer = (iframe, settings) => {
 				if (!interval) return
 				clearInterval(interval)
 				interval = null
-				console.log("INTERVAL CLEARED")
+				console.log('INTERVAL CLEARED')
 			}
 
 			clearAndSetNull(videoInterval)
 			dispatchEvent('video-progress', { videoId, title, state, currentTimeFormatted, adjustedDurationRaw, percent })
-			
+
 			if (state !== 'playing') return
-			
+
 			// players.forEach((other, otherIndex) => {
 			// 	if (otherIndex !== index) other.pauseVideo()
 			// })
@@ -95,7 +95,11 @@ const initializePlayer = (iframe, settings) => {
 		}
 
 		const events = { onReady, onStateChange }
-		new YT.Player(iframe, { events, videoId })
+
+		const Player = window.YT?.Player
+		if (!Player) return
+		/* eslint-disable-next-line no-new */
+		new Player(iframe, { events, videoId })
 	})
 }
 
@@ -103,7 +107,7 @@ export const initializeVideos = async settings => {
 	await loadYouTubeAPI()
 	const videoElements = document.querySelectorAll('.video-container iframe')
 
-	const promises = [...videoElements].map(iframe => initializePlayer(iframe, settings))
+	const promises = [ ...videoElements ].map(iframe => initializePlayer(iframe, settings))
 	const videos = (await Promise.all(promises)).reduce((acc, video) => {
 		const { videoId, player, adjustedDurationRaw, title } = video
 		const initialState = { timeViewed: 0, completed: false }

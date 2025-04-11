@@ -10,7 +10,6 @@ const result200 = { ok: true, status: 200 }
 const result400 = { ok: false, status: 400 }
 
 describe('Content Controller', () => {
-
 	after(restoreFetch)
 
 	describe('getContents', () => {
@@ -39,5 +38,4 @@ describe('Content Controller', () => {
 			assert.ok(error)
 		})
 	})
-
 })

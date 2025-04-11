@@ -14,11 +14,11 @@ router.get('/', (request, response) => {
 	const clientId = process.env.BLACKBOARD_CLIENT_ID
 
 	const params = [
-		`response_type=code`,
+		'response_type=code',
 		`client_id=${clientId}`,
 		`redirect_uri=${siteUrl}/api/v1/auth/code`
 	].join('&')
-	
+
 	const loginUrl = `${apiUrl}/v1/oauth2/authorizationcode?${params}`
 	response.redirect(loginUrl)
 })

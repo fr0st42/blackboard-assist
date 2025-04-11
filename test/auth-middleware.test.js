@@ -15,7 +15,6 @@ const failDependencies = () => ({
 const failNext = () => assert.fail('next() should not be called')
 
 describe('Auth Middleware', () => {
-
 	it('should return 401 if there is no session', async () => {
 		const request = { session: null }
 		const response = { status: code => ({ send: message => ({ code, message }) }) }
@@ -79,7 +78,7 @@ describe('Auth Middleware', () => {
 		next.called = false
 		const refreshAccessToken = refreshToken => {
 			assert.strictEqual(refreshToken, 'valid-refresh-token')
-			const authData = { 
+			const authData = {
 				access_token: 'new-access-token',
 				refresh_token: 'new-refresh-token',
 				expires_in: 3600,
@@ -89,7 +88,7 @@ describe('Auth Middleware', () => {
 		}
 		const checkMockAuthentication = checkAuthentication({ refreshAccessToken, updateSessionAuth })
 		const result = await checkMockAuthentication(request, response, next)
-		assert.strictEqual(result, undefined)  // next() is called, so result should be undefined
+		assert.strictEqual(result, undefined) // next() is called, so result should be undefined
 		assert.strictEqual(next.called, true)
 		const { accessToken, refreshToken, accessExpiration } = request.session
 		assert.strictEqual(accessToken, 'new-access-token')
@@ -97,5 +96,5 @@ describe('Auth Middleware', () => {
 		assert.ok(accessExpiration > Date.now())
 		assert.strictEqual(request.session.userId, 'user-id')
 	})
-
 })
+

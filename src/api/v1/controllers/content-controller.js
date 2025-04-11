@@ -3,8 +3,8 @@ const apiUrl = process.env.BLACKBOARD_API_URL
 
 const getContents = async (accessToken, courseId, contentId) => {
 	const url = `${apiUrl}/v1/courses/${courseId}/contents${contentId ? `/${contentId}/children` : ''}`
-	const options = { headers: { 'Authorization': `Bearer ${accessToken}` } }
-	
+	const options = { headers: { Authorization: `Bearer ${accessToken}` } }
+
 	const result = await fetch(url, options)
 	const { ok, status } = result
 
@@ -20,12 +20,12 @@ const updateContentTitle = async (accessToken, courseId, contentId, title) => {
 	const options = {
 		method: 'PATCH',
 		headers: {
-			'Authorization': `Bearer ${accessToken}`,
+			Authorization: `Bearer ${accessToken}`,
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({ title })
 	}
-	
+
 	const result = await fetch(url, options)
 	const { ok, status } = result
 

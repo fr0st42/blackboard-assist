@@ -39,7 +39,6 @@ const mockCourses = [
 ]
 
 describe('Course Controller', () => {
-
 	after(restoreFetch)
 
 	describe('getCourses', () => {
@@ -99,5 +98,4 @@ describe('Course Controller', () => {
 			assert.strictEqual(names[1].name, 'Course 2')
 		})
 	})
-
 })

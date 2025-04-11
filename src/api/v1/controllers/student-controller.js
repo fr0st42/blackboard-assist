@@ -3,8 +3,8 @@ const apiUrl = process.env.BLACKBOARD_API_URL
 
 const getStudents = async (accessToken, courseId) => {
 	const url = `${apiUrl}/v1/courses/${courseId}/users?expand=user&fields=user,courseRoleId`
-	const options = { headers: { 'Authorization': `Bearer ${accessToken}` } }
-	
+	const options = { headers: { Authorization: `Bearer ${accessToken}` } }
+
 	const result = await fetch(url, options)
 	const { ok, status } = result
 

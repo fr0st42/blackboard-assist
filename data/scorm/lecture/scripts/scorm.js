@@ -19,22 +19,22 @@ const setCompletion = (api, status, commit = false) => {
 }
 
 const createSetComplete = api => (commit = false) => {
-	console.log(`[SCORM COMPLETED]`)
+	console.log('[SCORM COMPLETED]')
 	return setCompletion(api, 'completed', commit)
 }
 
 const createSetIncomplete = api => (commit = false) => {
-	console.log(`[SCORM INCOMPLETE]`)
+	console.log('[SCORM INCOMPLETE]')
 	return setCompletion(api, 'incomplete', commit)
 }
 
 const createSetPassed = api => (commit = false) => {
-	console.log(`[SCORM PASSED]`)
+	console.log('[SCORM PASSED]')
 	return setCompletion(api, 'passed', commit)
 }
 
 const createSetFailed = api => (commit = false) => {
-	console.log(`[SCORM FAILED]`)
+	console.log('[SCORM FAILED]')
 	return setCompletion(api, 'failed', commit)
 }
 
@@ -56,11 +56,10 @@ const createGetScore = api => () => {
 
 const createSetInteraction = api => {
 	return (id, type, response, result, description = '', commit = false) => {
-		const index = api.LMSGetValue("cmi.interactions._count")
+		const index = api.LMSGetValue('cmi.interactions._count')
 		const prefix = `cmi.interactions.${index}.`
 
-		const truthyResult = result === true ? 'correct'
-			: result === false ? 'incorrect' : result || ''
+		const truthyResult = result === true ? 'correct' : result === false ? 'incorrect' : result || ''
 
 		api.LMSSetValue(`${prefix}id`, `${id} (${getScormTime()})`)
 		api.LMSSetValue(`${prefix}type`, type)
@@ -75,7 +74,7 @@ const createSetInteraction = api => {
 
 const createSetLog = api => {
 	return (id, response, commit = false) => {
-		const index = api.LMSGetValue("cmi.interactions._count")
+		const index = api.LMSGetValue('cmi.interactions._count')
 		const prefix = `cmi.interactions.${index}.`
 		const type = response.length <= 250 ? 'fill-in' : 'long-fill-in'
 		const responseTrunc = response.length > 2000 ? response.slice(0, 2000) : response
@@ -110,7 +109,7 @@ const createApiFunctions = api => ({
 export const getScormApi = () => {
 	const api = getApiRecursive(window)
 	if (!api) return
-	
+
 	api.LMSInitialize('')
 	window.addEventListener('beforeunload', () => {
 		createSetLog(api)('Session Ended', 'N/A', true)

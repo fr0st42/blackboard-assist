@@ -1,0 +1,43 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"globals": {
+	  "YT": "readonly",
+	  "hljs": "readonly"
+	},
+	"extends": "standard",
+	"rules": {
+		"indent": [
+			"error",
+			"tab"
+		],
+		"no-tabs": "off",
+		"semi": [
+			"error",
+			"never"
+		],
+		"eol-last": [
+			"error",
+			"always"
+		],
+		"no-multiple-empty-lines": [
+			"error",
+			{
+				"max": 2,
+				"maxEOF": 1,
+				"maxBOF": 1
+			}
+		],
+		"no-return-assign": "off",
+		"array-bracket-spacing": [
+			"error",
+			"always",
+			{
+				"objectsInArrays": true,
+				"arraysInArrays": false
+			}
+		]
+	}
+}

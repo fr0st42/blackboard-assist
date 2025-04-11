@@ -5,7 +5,6 @@ import { initializeVideos, createGetTimeValues } from './youtube.js'
 import { initializeTheme } from './theme.js'
 
 (async () => {
-
 	const response = await fetch('./settings.json')
 	const settings = await response.json()
 	if (!settings) return console.error('settings.json not found')
@@ -39,13 +38,13 @@ import { initializeTheme } from './theme.js'
 	const getTimeValues = createGetTimeValues(completionAdjusted)
 
 	const reducer = (acc, { adjustedDurationRaw }) => acc + adjustedDurationRaw - 1
-	const totalVideoDuration = Object.values(videos).reduce(reducer, 0) 
+	const totalVideoDuration = Object.values(videos).reduce(reducer, 0)
 	console.log('Videos', { videos })
 
-	console.log({settings})
+	console.log({ settings })
 
 	const stopOtherVideos = currentVideoId => {
-		Object.entries(videos).forEach(([videoId, { player }]) => {
+		Object.entries(videos).forEach(([ videoId, { player } ]) => {
 			if (videoId !== currentVideoId) player.pauseVideo()
 		})
 	}
@@ -75,7 +74,6 @@ import { initializeTheme } from './theme.js'
 	}
 
 	if (settings.misc.disableContextMenu) {
-
 		document.addEventListener('contextmenu', event => {
 			event.preventDefault()
 		})
@@ -122,9 +120,9 @@ import { initializeTheme } from './theme.js'
 		const { videoId, title, state, currentTimeFormatted, percent } = detail
 
 		const logId = (() => {
-			if (state === 'playing') return `Video Playing`
-			if (state === 'paused') return `Video Paused`
-			if (state === 'completed') return `Video Completed`
+			if (state === 'playing') return 'Video Playing'
+			if (state === 'paused') return 'Video Paused'
+			if (state === 'completed') return 'Video Completed'
 		})()
 
 		if (state === 'playing') stopOtherVideos(videoId)
@@ -134,7 +132,7 @@ import { initializeTheme } from './theme.js'
 		if (logId && tracking) setLog(logId, `${title}: ${currentTimeFormatted} (${displayPercent}%)`)
 
 		const { scoreMethod, roundScore, completionStatus } = settings.score
-		
+
 		const { currentTimeRaw, completed } = getTimeValues(videos[videoId].player)
 		if (currentTimeRaw < videos[videoId].timeViewed) return // don't penalize rewinds
 		videos[videoId].timeViewed = currentTimeRaw
@@ -161,7 +159,7 @@ import { initializeTheme } from './theme.js'
 				setLog('Video Progress Score', `Score set to ${totalVideoScoreRounded}/${maxScore} (${roundScore ? '' : 'not '}rounded)`)
 			}
 
-			if(isMarginalProgress && checkIfPassed(totalVideoScoreRounded)) {
+			if (isMarginalProgress && checkIfPassed(totalVideoScoreRounded)) {
 				const score = totalVideoScoreRounded
 				setLog('Satisfaction Attained', `Score reached ${score}, passing score is ${passingScore}`)
 			}
@@ -173,7 +171,7 @@ import { initializeTheme } from './theme.js'
 				setLog('Completion Status', `Video percentage reached ${percentRounded}%`)
 			}
 		}
-		
+
 		const areAllVideosCompleted = Object.values(videos).every(({ completed }) => completed)
 
 		if (completionStatus === 'allVideosCompleted' && areAllVideosCompleted) {
@@ -186,7 +184,7 @@ import { initializeTheme } from './theme.js'
 	// page scroll tracking
 
 	const scrollStorageKey = 'max-scroll'
-	localStorage.setItem(scrollStorageKey, "0")
+	localStorage.setItem(scrollStorageKey, '0')
 
 	document.addEventListener('scrollend', () => {
 		const { scrollY } = window
@@ -196,11 +194,11 @@ import { initializeTheme } from './theme.js'
 		const scrollPercent = Math.floor(scrollDecimal * 100)
 		const detail = { scrollPercent, scrollDecimal }
 		document.dispatchEvent(new CustomEvent('scroll-updated', { detail }))
-	});
+	})
 
 	document.addEventListener('scroll-updated', event => {
 		const { scrollPercent } = event.detail
-		const storedMax = parseInt(localStorage.getItem(scrollStorageKey) || "0", 10)
+		const storedMax = parseInt(localStorage.getItem(scrollStorageKey) || '0', 10)
 		const newMax = Math.max(storedMax, scrollPercent)
 		if (newMax < storedMax) return
 
@@ -251,10 +249,11 @@ import { initializeTheme } from './theme.js'
 		setLog('Code Submission Score', `Score set to ${newScoreRounded}/${maxScore} (${roundScore ? '' : 'not '}rounded)`)
 		checkIfPassed(newScoreRounded)
 
-		if (completionStatus === 'allExercisesSubmitted' && newScores.length >= exerciseCount) {
+		const { completionStatus } = settings.score
+
+		if (completionStatus === 'allExercisesSubmitted' && codeScores.length >= exerciseCount) {
 			setComplete()
 			setLog('Completion Status', 'All exercises submitted')
 		}
 	})
-
 })()

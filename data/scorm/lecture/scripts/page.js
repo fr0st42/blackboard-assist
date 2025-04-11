@@ -17,7 +17,7 @@ const loadAndReplaceDocument = async settings => {
 	const parser = new DOMParser()
 	const doc = parser.parseFromString(html, 'text/html')
 	document.body.innerHTML = doc.body.innerHTML
-	
+
 	if (!disableContextMenu) return
 	document.addEventListener('contextmenu', event => event.preventDefault())
 }
@@ -35,10 +35,8 @@ const setupIntersectionObserverForNav = () => {
 		const { id } = current
 		if (!id) return
 
-		const activate = document.querySelector(`nav li a[href="#${id}"]`).parentElement
+		// const activate = document.querySelector(`nav li a[href="#${id}"]`).parentElement
 		document.querySelectorAll('nav li.active').forEach(link => link.classList.remove('active'))
-		activate.classList.add('active')
-
 	}, { rootMargin: '-4% 0px -10% 0px' })
 
 	document.querySelectorAll('section [id]').forEach(heading => observer.observe(heading))
@@ -54,12 +52,12 @@ const setupVideoToggles = () => {
 	}
 
 	const getAllVideoSummaries = () => {
-		return [...document.querySelectorAll('summary.video')]
+		return [ ...document.querySelectorAll('summary.video') ]
 	}
 
 	const loadToggleStates = () => {
 		const videoStates = JSON.parse(localStorage.getItem(storageKey) || '{ }')
-		Object.entries(videoStates).forEach(([id, isOpen]) => {
+		Object.entries(videoStates).forEach(([ id, isOpen ]) => {
 			const video = document.querySelector(`[src="${id}"]`)
 			if (!video) return
 
@@ -110,7 +108,7 @@ const setupVideoToggles = () => {
 const setupCodeSubmissions = () => {
 	const exerciseSubmissions = document.querySelectorAll('.exercise-submission')
 
-	const validExerciseSubmissions = [...exerciseSubmissions].filter(element => {
+	const validExerciseSubmissions = [ ...exerciseSubmissions ].filter(element => {
 		const { parentElement } = element
 		if (!parentElement) return false
 
@@ -161,7 +159,7 @@ const setupCodeSubmissions = () => {
 			pre.appendChild(code)
 			element.insertBefore(pre, textarea)
 			code.innerHTML = hljs.highlight(textarea.value, { language }).value
-			
+
 			// hide the textarea and show the pre > code
 			textarea.style.display = 'none'
 			pre.style.display = 'block'
@@ -174,7 +172,7 @@ const setupCodeSubmissions = () => {
 				element.removeChild(pre)
 			})
 		}
-		
+
 		textarea.addEventListener('blur', () => {
 			const value = textarea.value.trim()
 			if (value) toggleCode()
@@ -192,14 +190,14 @@ const setupCodeSubmissions = () => {
 }
 
 const disableCourseLinks = () => {
-	[...document.querySelectorAll('aside .top a')].forEach(a => {
+	[ ...document.querySelectorAll('aside .top a') ].forEach(a => {
 		if (a.href.startsWith('https://github.com/')) return
 		a.href = '#'
 	})
 }
 
 const setupContentLinks = () => {
-	[...document.querySelectorAll('#content a')].forEach(a => {
+	[ ...document.querySelectorAll('#content a') ].forEach(a => {
 		if (!a.href.startsWith('#') && !a.target) a.target = '_blank'
 	})
 }
@@ -234,13 +232,12 @@ const setupCodeCopyElements = () => {
 }
 
 const setupHintAndSolutionTracking = () => {
-	[...document.querySelectorAll('h2')].forEach(h2 => {
+	[ ...document.querySelectorAll('h2') ].forEach(h2 => {
 		const text = h2.textContent.toLowerCase()
-		const type = text.includes('hint') ? 'hint'
-			: text.includes('solution') ? 'solution' : null
+		const type = text.includes('hint') ? 'hint' : text.includes('solution') ? 'solution' : null
 		if (!type) return
 
-		const details = [...h2.parentElement.querySelectorAll('details')]
+		const details = [ ...h2.parentElement.querySelectorAll('details') ]
 		details.forEach(detail => {
 			detail.addEventListener('toggle', () => {
 				if (!detail.open) return
@@ -297,6 +294,5 @@ export const loadPage = async settings => {
 	setupCodeCopyElements()
 	setupHintAndSolutionTracking()
 	setupCodeSubmissions()
-
-	if (true) addCompletionBar()
+	addCompletionBar()
 }

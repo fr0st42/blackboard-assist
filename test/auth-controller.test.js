@@ -12,7 +12,6 @@ const result200 = { ok: true, status: 200 }
 const result400 = { ok: false, status: 400 }
 
 describe('Auth Controller', () => {
-
 	after(restoreFetch)
 
 	describe('exchangeCodeForToken', () => {
@@ -26,7 +25,8 @@ describe('Auth Controller', () => {
 
 		it('successfully exchanges code for token', async () => {
 			global.fetch = async () => ({
-				...result200, json: async () => ({
+				...result200,
+				json: async () => ({
 					access_token: 'access-token',
 					refresh_token: 'refresh-token',
 					user_id: 'user-id'
@@ -50,7 +50,8 @@ describe('Auth Controller', () => {
 
 		it('successfully refreshes access token', async () => {
 			global.fetch = async () => ({
-				...result200, json: async () => ({
+				...result200,
+				json: async () => ({
 					access_token: 'new-access-token',
 					refresh_token: 'new-refresh-token',
 					user_id: 'user-id'
@@ -64,7 +65,7 @@ describe('Auth Controller', () => {
 	})
 
 	describe('updateSessionAuth', () => {
-		it ('should update session with new auth data', () => {
+		it('should update session with new auth data', () => {
 			const request = { session: { } }
 			const authData = {
 				access_token: 'new-access-token',
@@ -80,5 +81,4 @@ describe('Auth Controller', () => {
 			assert.ok(request.session.accessExpiration > Date.now())
 		})
 	})
-
 })

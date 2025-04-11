@@ -12,13 +12,13 @@ const getContentsOf = (directory, relativePath = '/') => {
 		if (entry.isDirectory()) {
 			const subdirectory = path.join(directory, entry.name)
 			const newRelativePath = path.join(relativePath, entry.name)
-			return [...acc, ...getContentsOf(subdirectory, newRelativePath)]
+			return [ ...acc, ...getContentsOf(subdirectory, newRelativePath) ]
 		}
 
 		const name = path.join(relativePath, entry.name)
 		const contents = fs.readFileSync(path.join(directory, entry.name), 'utf8')
-		return [...acc, { name, contents }]
-	}, [])
+		return [ ...acc, { name, contents } ]
+	}, [ ])
 
 	return results
 }
