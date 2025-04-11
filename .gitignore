@@ -1,0 +1,6 @@
+
+.rest_client/
+node_modules/
+
+*.env
+.*.*
