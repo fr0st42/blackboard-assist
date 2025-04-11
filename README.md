@@ -20,7 +20,7 @@ Project uses npm for package management. To install the project, run the followi
 npm install
 ```
 
-### Environment Variables
+### ➕ Environment Variables
 Create a `.env` file in the root directory of the project and add the following variables:
 
 ```bash
@@ -63,3 +63,7 @@ npm test
 ## 🤝 Contributing
 
 Contributions are welcome. Open an issue or submit a pull request.
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE) © 2025 Ryan Appel.
