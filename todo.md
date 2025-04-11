@@ -1,2 +1,10 @@
 
-- [ ] Move student endpoint/controller to its own files (and tests)
+- [x] Finish testing controllers
+- [ ] Add file upload functionality (for term.csv)
+- [ ] Frontend interface for file upload
+- [ ] Frontend interface for scorm generation
+- [ ] Frontend interface module name updates
+- [ ] Frontend interface for course copies
+- [ ] Backend API for course copies
+- [ ] Controllers for course copies
+- [ ] Backend API for file upload
