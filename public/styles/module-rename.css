@@ -1,0 +1,25 @@
+
+#find-and-replace {
+	width: 100%;
+
+	textarea {
+		width: 100%;
+		height: 400px;
+		min-height: 100px;
+		resize: vertical;
+	}
+}
+
+input[type='text'] {
+	min-width: 480px;
+	padding: 5px;
+	border: 2px solid #ccc;
+	font-size: 1rem;
+	padding: 2px 4px;
+	border-radius: 5px;
+	margin: 2px;
+}
+
+input[type='text'].changed {
+	border-color: #ff0000;
+}

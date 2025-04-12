@@ -1,0 +1,51 @@
+
+#theme-picker {
+
+    display: flex;
+    align-items: center;
+    border-radius: 50px;
+    background-color: var(--color-accent-blue);
+    overflow: hidden;
+	width: 50%;
+	height: 32px;
+	margin: 1rem;
+	max-width: 100px;
+
+	button {
+		flex: 1;
+		padding: 6px;
+		border: none;
+		margin: 0;
+		border-radius: 0;
+		background: transparent;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: background-color 0.3s;
+		color: white;
+
+		img {
+			width: 20px;
+			height: 20px;
+		}
+	}
+
+	button:first-child {
+		border-top-left-radius: 50%;
+		border-bottom-left-radius: 50%;
+	}
+
+	button:last-child {
+		border-top-right-radius: 50%;
+		border-bottom-right-radius: 50%;
+		background-color: transparent;
+		transition: background-color 1s;
+	}
+
+	button:hover,
+	button:focus,
+	button:active,
+	button.selected {
+		background-color: rgba(255, 255, 255, 0.2);
+	}
+}
