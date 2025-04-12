@@ -5,9 +5,9 @@ const express = require('express')
 const router = express.Router()
 const root = path.join(__dirname, '..', 'public')
 
-router.get('/', (request, response) => {
+const redirectIfNotAuthenticated = (request, response, next) => {
 	const accessToken = request?.session?.accessToken
-	if (accessToken) return response.sendFile('index.html', { root })
+	if (accessToken) return next()
 
 	const siteUrl = process.env.SITE_URL
 	const apiUrl = process.env.BLACKBOARD_API_URL
@@ -21,8 +21,24 @@ router.get('/', (request, response) => {
 
 	const loginUrl = `${apiUrl}/v1/oauth2/authorizationcode?${params}`
 	response.redirect(loginUrl)
-})
+}
 
 router.use(express.static(root))
+
+router.get('/', redirectIfNotAuthenticated, (_, response) => {
+	response.sendFile('index.html', { root })
+})
+
+router.get('/scorm/', redirectIfNotAuthenticated, (_, response) => {
+	response.sendFile('index.html', { root })
+})
+
+router.post('/scorm/generate', redirectIfNotAuthenticated, (_, response) => {
+	response.status(404).send('Not yet implemented')
+})
+
+router.get('/module-rename', redirectIfNotAuthenticated, (_, response) => {
+	response.sendFile('module-rename.html', { root })
+})
 
 module.exports = router

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Module Rename Tool</title>
+
+	<link rel="stylesheet" href="/styles/site.css">
+	<link rel="stylesheet" href="/styles/theme.css">
+	<link rel="stylesheet" href="/styles/module-rename.css">
+
+	<script src="/scripts/theme.js" type="module"></script>
+	<script src="/scripts/course-modules.js" type="module"></script>
+</head>
+
+<body>
+	<aside>
+		<section id="theme-picker">
+			<button id="light-theme">
+				<img src="/images/theme/light.svg" alt="Light Theme">
+			</button>
+			<button id="system-theme">
+				<img src="/images/theme/system.svg" alt="System Theme">
+			</button>
+			<button id="dark-theme">
+				<img src="/images/theme/dark.svg" alt="Dark Theme">
+			</button>
+		</section>
+		<section id="find-and-replace">
+			<h2>Find and Replace</h2>
+			<textarea></textarea>
+			<label for="delimiter">Delimiter:</label>
+			<select id="delimiter" name="delimiter">
+				<option value=":">: (Colon)</option>
+				<option value="|">| (Pipe)</option>
+				<option value=",">, (Comma)</option>
+			</select>
+			<button>Find and Replace</button>
+		</section>
+	</aside>
+	<main>
+		<h1>Module Rename Tool</h1>
+		<p>Use this tool to rename your top-level course modules in Blackboard.</p>
+		<div id="term-select">
+			<label for="term">Select Term:</label>
+			<select id="term" name="term">
+				<option value="2023-fall">Fall 2023</option>
+				<option value="2024-spring">Spring 2024</option>
+				<option value="2024-summer">Summer 2024</option>
+			</select>
+		</div>
+		<div id="courses">
+			<div class="course">
+				<h2>Example Course 1</h2>
+				<a href="www.example.com">Open Course in Blackboard</a>
+				<button class="load-modules">Load Modules</button>
+				<div class="modules">
+					<div class="module">
+						<input type="text" placeholder="Module Name" value="Module 1 (*1*)">
+						<button class="update">Update</button>
+					</div>
+					<div class="module">
+						<input type="text" placeholder="Module Name" value="Module 2 (*2*)">
+						<button class="update">Update</button>
+					</div>
+					<div class="module">
+						<input type="text" placeholder="Module Name" value="Module 3 (*3*)">
+						<button class="update">Update</button>
+					</div>
+				</div>
+			</div>
+			<div class="course">
+				<h2>Example Course 2</h2>
+				<a href="www.example.com">Open Course in Blackboard</a>
+				<button class="load-modules">Load Modules</button>
+				<div class="modules">
+					<div class="module">
+						<input type="text" placeholder="Module Name" value="Module 1 (*1*)">
+						<button class="update">Update</button>
+					</div>
+					<div class="module">
+						<input type="text" placeholder="Module Name" value="Module 2 (*2*)">
+						<button class="update">Update</button>
+					</div>
+					<div class="module">
+						<input type="text" placeholder="Module Name" value="Module 3 (*3*)">
+						<button class="update">Update</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+
+</html>
