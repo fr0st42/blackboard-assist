@@ -9,12 +9,12 @@ const filenames = fs.readdirSync(path.join(__dirname, 'paths')).reduce((acc, fil
 		return [ ...acc, name ]
 	}
 	return acc
-}, [ ])
+}, [])
 
 // Import all JSON files and merge them into a single object
 const paths = filenames.map(name => {
 	return require(`./paths/${name}.json`)
-}).reduce((acc, path) => ({ ...acc, ...path }), { })
+}).reduce((acc, path) => ({ ...acc, ...path }), {})
 
 
 // Export the options object for the Swagger UI
@@ -31,5 +31,19 @@ module.exports = {
 			description: 'Server'
 		}
 	],
+	// components: {
+	// 	securitySchemes: {
+	// 		bearerAuth: {
+	// 			type: 'http',
+	// 			scheme: 'bearer',
+	// 			bearerFormat: 'JWT'
+	// 		}
+	// 	}
+	// },
+	// security: [
+	// 	{
+	// 		bearerAuth: [ ]
+	// 	}
+	// ],
 	paths
 }

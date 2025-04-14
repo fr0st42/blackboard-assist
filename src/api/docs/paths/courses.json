@@ -1,7 +1,9 @@
 {
 	"/api/v1/courses": {
 		"get": {
-		"tags": ["Courses"],
+			"tags": [
+				"Courses"
+			],
 			"summary": "Retrieve modifiable courses",
 			"description": "Get courses that the user is authorized to modify.",
 			"responses": {
@@ -16,7 +18,9 @@
 	},
 	"/api/v1/courses/names": {
 		"get": {
-			"tags": ["Courses"],
+			"tags": [
+				"Courses"
+			],
 			"summary": "Retrieve course names",
 			"description": "Get names of courses that the user is authorized to modify.",
 			"responses": {
@@ -31,7 +35,9 @@
 	},
 	"/api/v1/courses/{courseId}/students": {
 		"get": {
-			"tags": ["Courses"],
+			"tags": [
+				"Courses"
+			],
 			"summary": "Get students in a course",
 			"parameters": [
 				{
@@ -56,7 +62,9 @@
 	},
 	"/api/v1/courses/{courseId}/contents": {
 		"get": {
-			"tags": ["Courses"],
+			"tags": [
+				"Courses"
+			],
 			"summary": "Get course contents",
 			"parameters": [
 				{
@@ -81,7 +89,9 @@
 	},
 	"/api/v1/courses/{courseId}/contents/{contentId}": {
 		"get": {
-			"tags": ["Courses"],
+			"tags": [
+				"Courses"
+			],
 			"summary": "Get specific content",
 			"parameters": [
 				{
@@ -113,7 +123,9 @@
 			}
 		},
 		"patch": {
-			"tags": ["Courses"],
+			"tags": [
+				"Courses"
+			],
 			"summary": "Update specific content",
 			"parameters": [
 				{
