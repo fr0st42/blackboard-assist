@@ -30,7 +30,9 @@
 		"dotenv": "^16.4.7",
 		"express": "^5.1.0",
 		"express-session": "^1.18.1",
-		"memorystore": "^1.6.7"
+		"memorystore": "^1.6.7",
+		"swagger-jsdoc": "^6.2.8",
+		"swagger-ui-express": "^5.0.1"
 	},
 	"devDependencies": {
 		"eslint": "^8.57.1",

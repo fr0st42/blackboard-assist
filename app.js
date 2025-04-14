@@ -4,6 +4,8 @@ require('dotenv').config()
 const express = require('express')
 const session = require('express-session')
 const MemoryStore = require('memorystore')(session)
+const swaggerUi = require('swagger-ui-express')
+const swaggerDocument = require('./src/api/docs/swagger')
 
 const apiRoutes = require('./src/api/v1/api-routes')
 const publicRoutes = require('./src/public-routes')
@@ -19,6 +21,7 @@ app.use(session({
 	cookie: { maxAge: oneDay }
 }))
 
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use('/api/v1', apiRoutes)
 app.use('/', publicRoutes)
 

@@ -1,0 +1,17 @@
+{
+	"/api/v1/terms": {
+		"get": {
+		"tags": ["Terms"],
+			"summary": "Retrieve a list of terms",
+			"description": "Get the list of terms for the school.",
+			"responses": {
+				"200": {
+					"description": "List of terms"
+				},
+				"401": {
+					"description": "Unauthorized access"
+				}
+			}
+		}
+	}
+}

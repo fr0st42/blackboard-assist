@@ -1,0 +1,169 @@
+{
+	"/api/v1/courses": {
+		"get": {
+		"tags": ["Courses"],
+			"summary": "Retrieve modifiable courses",
+			"description": "Get courses that the user is authorized to modify.",
+			"responses": {
+				"200": {
+					"description": "List of courses"
+				},
+				"401": {
+					"description": "Unauthorized access"
+				}
+			}
+		}
+	},
+	"/api/v1/courses/names": {
+		"get": {
+			"tags": ["Courses"],
+			"summary": "Retrieve course names",
+			"description": "Get names of courses that the user is authorized to modify.",
+			"responses": {
+				"200": {
+					"description": "List of course names"
+				},
+				"401": {
+					"description": "Unauthorized access"
+				}
+			}
+		}
+	},
+	"/api/v1/courses/{courseId}/students": {
+		"get": {
+			"tags": ["Courses"],
+			"summary": "Get students in a course",
+			"parameters": [
+				{
+					"name": "courseId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "string"
+					},
+					"description": "ID of the course"
+				}
+			],
+			"responses": {
+				"200": {
+					"description": "List of students"
+				},
+				"404": {
+					"description": "Course not found"
+				}
+			}
+		}
+	},
+	"/api/v1/courses/{courseId}/contents": {
+		"get": {
+			"tags": ["Courses"],
+			"summary": "Get course contents",
+			"parameters": [
+				{
+					"name": "courseId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "string"
+					},
+					"description": "ID of the course"
+				}
+			],
+			"responses": {
+				"200": {
+					"description": "Course contents"
+				},
+				"404": {
+					"description": "Course not found"
+				}
+			}
+		}
+	},
+	"/api/v1/courses/{courseId}/contents/{contentId}": {
+		"get": {
+			"tags": ["Courses"],
+			"summary": "Get specific content",
+			"parameters": [
+				{
+					"name": "courseId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "string"
+					},
+					"description": "ID of the course"
+				},
+				{
+					"name": "contentId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "string"
+					},
+					"description": "ID of the content"
+				}
+			],
+			"responses": {
+				"200": {
+					"description": "Content details"
+				},
+				"404": {
+					"description": "Content not found"
+				}
+			}
+		},
+		"patch": {
+			"tags": ["Courses"],
+			"summary": "Update specific content",
+			"parameters": [
+				{
+					"name": "courseId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "string"
+					},
+					"description": "ID of the course"
+				},
+				{
+					"name": "contentId",
+					"in": "path",
+					"required": true,
+					"schema": {
+						"type": "string"
+					},
+					"description": "ID of the content"
+				}
+			],
+			"requestBody": {
+				"required": true,
+				"content": {
+					"application/json": {
+						"schema": {
+							"type": "object",
+							"properties": {
+								"title": {
+									"type": "string"
+								},
+								"body": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				}
+			},
+			"responses": {
+				"200": {
+					"description": "Content updated"
+				},
+				"400": {
+					"description": "Invalid input"
+				},
+				"404": {
+					"description": "Content not found"
+				}
+			}
+		}
+	}
+}
