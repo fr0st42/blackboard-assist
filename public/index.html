@@ -4,10 +4,29 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Blackboard Assist Home</title>
+
 	<link rel="stylesheet" href="/styles/site.css">
+	<link rel="stylesheet" href="/styles/theme.css">
+
+	<script src="/scripts/theme.js" type="module"></script>
 </head>
-<body class="dark">
-	<a href="/module-rename">Module Rename Tool</a>
-	<a href="/scorm">Scorm Generator</a>
+<body>
+	<aside>
+		<section id="theme-picker">
+			<button id="light-theme">
+				<img src="/images/theme/light.svg" alt="Light Theme">
+			</button>
+			<button id="system-theme">
+				<img src="/images/theme/system.svg" alt="System Theme">
+			</button>
+			<button id="dark-theme">
+				<img src="/images/theme/dark.svg" alt="Dark Theme">
+			</button>
+		</section>
+	</aside>
+	<main>
+		<a href="/module-rename">Module Rename Tool</a>
+		<a href="/scorm">Scorm Generator</a>
+	</main>
 </body>
 </html>
