@@ -21,7 +21,12 @@ app.use(session({
 	cookie: { maxAge: oneDay }
 }))
 
-app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+
+const setupOptions = swaggerUi.setup(swaggerDocument, {
+	customSiteTitle: 'Blackboard API Docs'
+})
+
+app.use('/api/docs', swaggerUi.serve, setupOptions)
 app.use('/api/v1', apiRoutes)
 app.use('/', publicRoutes)
 
