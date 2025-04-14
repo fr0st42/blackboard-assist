@@ -26,9 +26,11 @@ const exchangeCodeForToken = async code => {
 	const result = await fetch(url, options)
 	const { ok, status } = result
 
+	const authData = await result.json()
+	console.log({ code })
+
 	if (!ok) return { error: { status, message: 'Authentication failed' } }
 
-	const authData = await result.json()
 	return { authData }
 }
 
