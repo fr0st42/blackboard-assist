@@ -29,8 +29,8 @@ router.get('/', redirectIfNotAuthenticated, (_, response) => {
 	response.sendFile('index.html', { root })
 })
 
-router.get('/scorm/', redirectIfNotAuthenticated, (_, response) => {
-	response.sendFile('index.html', { root })
+router.get('/scorm', redirectIfNotAuthenticated, (_, response) => {
+	response.sendFile('scorm.html', { root })
 })
 
 router.post('/scorm/generate', redirectIfNotAuthenticated, (_, response) => {
