@@ -23,7 +23,7 @@ app.use(session({
 
 
 const setupOptions = swaggerUi.setup(swaggerDocument, {
-	customSiteTitle: 'Blackboard API Docs'
+	customSiteTitle: 'Blackboard Assist API Docs'
 })
 
 app.use('/api/docs', swaggerUi.serve, setupOptions)

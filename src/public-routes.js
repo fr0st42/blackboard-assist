@@ -41,4 +41,8 @@ router.get('/module-rename', redirectIfNotAuthenticated, (_, response) => {
 	response.sendFile('module-rename.html', { root })
 })
 
+router.get('/developer', redirectIfNotAuthenticated, (_, response) => {
+	response.sendFile('developer.html', { root })
+})
+
 module.exports = router
