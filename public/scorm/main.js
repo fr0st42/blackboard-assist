@@ -4,6 +4,26 @@
 	const moduleSelect = document.querySelector('#modules')
 	const studentsDiv = document.querySelector('#students')
 	const scormsDiv = document.querySelector('#scorms')
+	const addLinkButton = document.querySelector('#add-link')
+
+	const referrer = new URL(location.href).searchParams.get('referrer')
+	if (referrer === 'bb') {
+		addLinkButton.remove()
+	} else {
+		addLinkButton.addEventListener('click', async () => {
+			const courseId = courseSelect.value
+			const moduleId = moduleSelect.value
+			const url = `/api/v1/courses/${courseId}/contents/${moduleId}/scorms/add-link`
+			const result = await fetch(url, { method: 'POST' })
+			const { status } = result
+			if (status !== 200) {
+				const { message } = await result.json()
+				return alert(`Error: ${message}`)
+			}
+			const { message } = await result.json()
+			alert(message)
+		})
+	}
 
 	const safeFetch = async (url, options) => {
 		try {
@@ -20,21 +40,25 @@
 		return Object.fromEntries(new URLSearchParams(location.search))
 	}
 
-	courseSelect.addEventListener('change', async e => {
-		const courseId = e.target.value
+	courseSelect.addEventListener('change', async event => {
+		const { target, isTrusted } = event
+		const courseId = target.value
 		const baseUrl = new URL(location.href)
-		history.replaceState({}, '', `${baseUrl.pathname}?courseId=${courseId}`)
+		const ref = referrer && !isTrusted ? `&referrer=${referrer}` : ''
+		history.replaceState({}, '', `${baseUrl.pathname}?courseId=${courseId}${ref}`)
 
 		const modules = await loadModules(courseId)
 		if (!modules || !modules.length) return (studentsDiv.innerHTML = '<p>No modules found</p>')
 		await fillModuleSelect(modules)
 	})
 
-	moduleSelect.addEventListener('change', async e => {
-		const moduleId = e.target.value
+	moduleSelect.addEventListener('change', async event => {
+		const { target, isTrusted } = event
+		const moduleId = target.value
 		const courseId = courseSelect.value
 		const baseUrl = new URL(location.href)
-		history.replaceState({}, '', `${baseUrl.pathname}?courseId=${courseId}&moduleId=${moduleId}`)
+		const ref = referrer && !isTrusted ? `&referrer=${referrer}` : ''
+		history.replaceState({}, '', `${baseUrl.pathname}?courseId=${courseId}&moduleId=${moduleId}${ref}`)
 
 		const scorms = await loadScorms(courseId, moduleId)
 		if (!scorms || !scorms.length) return (scormsDiv.innerHTML = '<p>No SCORM objects found</p>')

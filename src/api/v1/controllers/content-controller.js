@@ -87,5 +87,46 @@ const markScormObjectComplete = async (accessToken, courseId, scormId, studentId
 	return { contents: { message: 'Scorm marked as complete' } }
 }
 
+const addScormCompletionLink = async (accessToken, courseId, moduleId) => {
+	const url = `${apiUrl}/v1/courses/${courseId}/contents/${moduleId}/children`
+	const body = {
+		title: 'Scorm Completion',
+		parentId: moduleId,
+		position: 0,
+		launchInNewWindow: true,
+		contentHandler: {
+			id: 'resource/x-bb-externallink',
+			url: `${process.env.SITE_URL}/scorm/complete?courseId=${courseId}&moduleId=${moduleId}&referrer=bb`
+		},
+		availability: {
+			available: 'No'
+		}
+	}
 
-module.exports = { getContents, updateContentTitle, getScormObjects, markScormObjectComplete }
+	const options = {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(body)
+	}
+
+	const result = await fetch(url, options)
+	const { ok, status } = result
+
+	if (!ok) return { error: { status, message: 'Could not add scorm completion link' } }
+
+	const json = await result.json()
+	const results = json.results
+	return { results, message: 'Scorm completion link added' }
+}
+
+
+module.exports = {
+	getContents,
+	updateContentTitle,
+	getScormObjects,
+	markScormObjectComplete,
+	addScormCompletionLink
+}
