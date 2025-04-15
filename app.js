@@ -13,6 +13,8 @@ const publicRoutes = require('./src/public-routes')
 const app = express()
 const oneDay = 1000 * 60 * 60 * 24
 
+console.log(`${process.env.BLACKBOARD_API_URL.includes('.edu') ? 'LIVE' : 'DEV SERVER'}`)
+
 app.use(session({
 	secret: process.env.SESSION_SECRET,
 	resave: false,

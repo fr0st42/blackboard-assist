@@ -3,12 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Developer Portal</title>
+	<title>Mark Scorm Complete</title>
 
 	<link rel="stylesheet" href="/styles/site.css">
 	<link rel="stylesheet" href="/styles/theme.css">
+	<link rel="stylesheet" href="style.css">
 
 	<script src="/scripts/theme.js" type="module"></script>
+	<script src="main.js" type="module"></script>
 </head>
 <body>
 	<aside>
@@ -22,13 +24,17 @@
 			<button id="dark-theme">
 				<img src="/images/theme/dark.svg" alt="Dark Theme">
 			</button>
-		</section>
+		</section>  
 	</aside>
 	<main>
-		<a href="/api/docs">API Documentation</a>
-		<a href="/module-rename">Module Rename Tool</a>
-		<a href="/scorm">Scorm Generator</a>
-		<a href="/scorm/complete">Mark Scorm Complete</a>
+		<h1>Mark Scorm Complete</h1>
+		<p>Use this tool to mark scorm objects as complete.</p>
+
+		<select id="courses"></select>
+		<select id="modules"></select>
+
+		<div id="students"></div>
+		<div id="scorms"></div>
 	</main>
 </body>
 </html>

@@ -45,4 +45,8 @@ router.get('/developer', redirectIfNotAuthenticated, (_, response) => {
 	response.sendFile('developer.html', { root })
 })
 
+router.get('/scorm/complete', redirectIfNotAuthenticated, (_, response) => {
+	response.sendFile('scorm/complete.html', { root })
+})
+
 module.exports = router

@@ -67,4 +67,24 @@ router.patch('/:courseId/contents/:contentId', authMiddleware, async (request, r
 	response.json(contents)
 })
 
+router.get('/:courseId/contents/:contentId/scorms', authMiddleware, async (request, response) => {
+	const { accessToken } = request.session
+	const { courseId, contentId } = request.params
+	const { getScormObjects } = contentController
+	const { scorms, error } = await getScormObjects(accessToken, courseId, contentId)
+	if (error) return handleError(response, error)
+	response.json(scorms)
+})
+
+router.patch('/:courseId/contents/scorms/:scormId/completed', authMiddleware, async (request, response) => {
+	const { accessToken } = request.session
+	const { courseId, scormId } = request.params
+	const { studentIds } = request.body
+	const { markScormObjectComplete } = contentController
+	const { contents, error } = await markScormObjectComplete(accessToken, courseId, scormId, studentIds)
+	if (error) return handleError(response, error)
+	response.json(contents)
+})
+
+
 module.exports = router
