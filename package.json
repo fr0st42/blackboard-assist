@@ -7,7 +7,7 @@
 	"scripts": {
 		"lint": "eslint .",
 		"test": "node --test",
-		"start": "npm run lint && node server",
+		"start": "node server",
 		"dev": "npm run lint && nodemon server"
 	},
 	"repository": {

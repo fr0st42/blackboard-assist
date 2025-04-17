@@ -43,10 +43,10 @@ const startCourseCopy = async (accessToken, course) => {
 
 	const result = await fetch(url, options)
 	const { ok, status } = result
-
-	//if (!ok) return { error: { status, message: 'Could not create course' } }
-
 	const json = await result.json()
+
+	if (!ok) return { error: { status, message: 'Could not create course' } }
+
 	return json
 }
 

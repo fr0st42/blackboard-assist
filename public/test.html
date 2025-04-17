@@ -20,8 +20,9 @@
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify({ courseId, name })
 	})
+    const json = await result.json()
 
-    p.textContent = JSON.stringify(result, null, 2)
+    p.textContent = JSON.stringify(json, null, 2)
 
 })()
 </script>
