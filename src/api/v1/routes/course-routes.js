@@ -1,6 +1,7 @@
 
 const router = require('express').Router()
 
+const authController = require('../controllers/auth-controller')
 const courseController = require('../controllers/course-controller')
 const studentController = require('../controllers/student-controller')
 const contentController = require('../controllers/content-controller')
@@ -20,6 +21,15 @@ router.get('/', authMiddleware, async (request, response) => {
 	const { courses, error } = await getCourses(accessToken)
 	if (error) return handleError(response, error)
 	response.json(courses)
+})
+
+router.post('/copy', authMiddleware, async (request, response) => {
+	const { getAccessToken } = authController
+	const { accessToken } = await getAccessToken()
+	const { courseId, name } = request.body
+	const { startCourseCopy } = courseController
+	const result = await startCourseCopy(accessToken, { courseId, name })
+	response.send(result)
 })
 
 router.get('/names', authMiddleware, async (request, response) => {

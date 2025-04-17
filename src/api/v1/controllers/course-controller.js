@@ -1,6 +1,7 @@
 
 const apiUrl = process.env.BLACKBOARD_API_URL
 
+
 const getCourses = async (accessToken, termId) => {
 	const params = { expand: 'course', fields: 'course,courseRoleId' }
 	const queryString = new URLSearchParams(params).toString()
@@ -22,6 +23,33 @@ const getCourses = async (accessToken, termId) => {
 	return { courses }
 }
 
+const startCourseCopy = async (accessToken, course) => {
+	const { name, courseId } = course
+
+	const body = {
+		name,
+		courseId
+	}
+
+	const url = `${apiUrl}/v3/courses`
+	const options = {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${accessToken}`,
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(body)
+	}
+
+	const result = await fetch(url, options)
+	const { ok, status } = result
+
+	//if (!ok) return { error: { status, message: 'Could not create course' } }
+
+	const json = await result.json()
+	return json
+}
+
 const getCourseNames = async (accessToken, termId) => {
 	const { courses, error } = await getCourses(accessToken, termId)
 	if (error) return error
@@ -31,4 +59,4 @@ const getCourseNames = async (accessToken, termId) => {
 }
 
 
-module.exports = { getCourses, getCourseNames }
+module.exports = { getCourses, getCourseNames, startCourseCopy }

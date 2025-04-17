@@ -4,6 +4,33 @@ const clientSecret = process.env.BLACKBOARD_CLIENT_SECRET
 const apiUrl = process.env.BLACKBOARD_API_URL
 const encoded = Buffer.from(`${clientId}:${clientSecret}`).toString('base64')
 
+const getAccessToken = async () => {
+	const url = `${apiUrl}/v1/oauth2/token`
+	/* eslint-disable camelcase */
+	const grant_type = 'client_credentials'
+	const params = { grant_type }
+	/* eslint-enable camelcase */
+	
+	const options = {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			Authorization: `Basic ${encoded}`
+		},
+		body: new URLSearchParams(params).toString()
+	}
+
+	const result = await fetch(url, options)
+	const { ok, status } = result
+
+	const { access_token } = await result.json()
+	const accessToken = access_token
+
+	if (!ok || !accessToken) return { error: { status, message: 'Authentication failed' } }
+
+	return { accessToken }
+}
+
 const exchangeCodeForToken = async code => {
 	const siteUrl = process.env.SITE_URL
 	const redirectUrl = `${siteUrl}/api/v1/auth/code`
@@ -71,4 +98,9 @@ const updateSessionAuth = (request, authData) => {
 }
 
 
-module.exports = { exchangeCodeForToken, refreshAccessToken, updateSessionAuth }
+module.exports = {
+	getAccessToken,
+	exchangeCodeForToken,
+	refreshAccessToken,
+	updateSessionAuth
+}
