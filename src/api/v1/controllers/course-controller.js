@@ -22,14 +22,6 @@ const getCourses = async (accessToken, termId) => {
 	return { courses }
 }
 
-// PUT {{apiV1}}/courses/_9163_1/users/_522472_1
-// Authorization: Bearer {{accessToken}}
-// Content-Type: application/json
-
-// {
-//     "courseRoleId": "Instructor"
-// }
-
 const getUserId = async accessToken => {
 	const url = `${apiUrl}/v1/users/me`
 	const options = { headers: { Authorization: `Bearer ${accessToken}` } }
