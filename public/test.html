@@ -4,26 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <script src="/scripts/course-copy.js" type="module"></script>
 </head>
 <body>
     <p>Test</p>
 </body>
-<script>
-(async () => {
-
-    const p = document.querySelector('p')
-    const courseId = 'test-course-id'
-    const name = 'test-course-name'
-
-    const result = await fetch('/api/v1/courses/copy', {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ courseId, name })
-	})
-    const json = await result.json()
-
-    p.textContent = JSON.stringify(json, null, 2)
-
-})()
-</script>
 </html>
