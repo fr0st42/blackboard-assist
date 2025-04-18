@@ -3,8 +3,8 @@ import { safeFetch } from "./safe-fetch.js"
 
 (async () => {
     const p = document.querySelector('p')
-    const courseId = 'test-course-id'
-    const name = 'test-course-name'
+    const courseId = 'test-course-id8'
+    const name = 'test-course-name8'
 
     const { result, error } = await safeFetch('/api/v1/courses/copy', {
 		method: 'POST',

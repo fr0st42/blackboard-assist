@@ -24,11 +24,12 @@ router.get('/', authMiddleware, async (request, response) => {
 })
 
 router.post('/copy', authMiddleware, async (request, response) => {
+	const { accessToken } = request.session
 	const { getAccessToken } = authController
-	const { accessToken } = await getAccessToken()
+	const { accessToken: adminToken } = await getAccessToken()
 	const { courseId, name } = request.body
 	const { startCourseCopy } = courseController
-	const result = await startCourseCopy(accessToken, { courseId, name })
+	const result = await startCourseCopy(adminToken, accessToken, { courseId, name })
 	if (result.error) return handleError(response, result.error)
 	response.send(result)
 })
