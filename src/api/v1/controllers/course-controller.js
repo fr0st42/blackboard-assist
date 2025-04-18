@@ -53,6 +53,7 @@ const assignInstructor = async (accessToken, courseId, instructorId) => {
 const startCourseCopy = async (adminToken, accessToken, course) => {
 	const { name, courseId } = course
 	const { userId } = await getUserId(accessToken)
+	if (!userId) return { error: { status: 500, message: 'Could not find logged in user' } }
 
 	const url = `${apiUrl}/v3/courses`
 	const options = {

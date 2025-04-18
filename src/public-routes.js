@@ -36,4 +36,8 @@ router.get('/scorm/complete', redirectIfNotAuthenticated, (_, response) => {
 	response.sendFile('scorm/complete.html', { root })
 })
 
+router.get('/term/upload', redirectIfNotAuthenticated, (_, response) => {
+	response.sendFile('term/upload.html', { root })
+})
+
 module.exports = router
