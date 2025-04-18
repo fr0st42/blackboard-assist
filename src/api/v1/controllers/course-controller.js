@@ -40,8 +40,8 @@ const getUserId = async accessToken => {
 	return { userId: id }
 }
 
-const assignInstructor = async (accessToken, courseId) => {
-	const url = `${apiUrl}/v3/courses/${courseId}/users/me`
+const assignInstructor = async (accessToken, courseId, instructorId) => {
+	const url = `${apiUrl}/v1/courses/${courseId}/users/${instructorId}`
 	const options = {
 		method: 'PUT',
 		headers: {
@@ -53,13 +53,15 @@ const assignInstructor = async (accessToken, courseId) => {
 
 	const result = await fetch(url, options)
 	const { ok, status } = result
-	if (!ok) return { error: { status, message: 'Could not create course' } }
+	const json = await result.json()
+	if (!ok) return { error: { status, message: 'Could not assign instructor to course', json } }
+	return { json }
 }
 
 const startCourseCopy = async (adminToken, accessToken, course) => {
 	const { name, courseId } = course
 	const { userId } = await getUserId(accessToken)
-	
+
 	const url = `${apiUrl}/v3/courses`
 	const options = {
 		method: 'POST',
@@ -75,9 +77,11 @@ const startCourseCopy = async (adminToken, accessToken, course) => {
 	if (!ok) return { error: { status, message: 'Could not create course' } }
 
 	const { id } = await result.json()
-	console.log(id)
-	const { error } = await assignInstructor(accessToken, id, userId)
+	console.log({ id, userId })
+
+	const { error } = await assignInstructor(adminToken, id, userId)
 	if (error) return { error }
+
 	return { id }
 }
 
