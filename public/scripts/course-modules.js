@@ -1,31 +1,5 @@
 
-const loadCourses = async () => {
-	const result = await fetch('/api/v1/courses')
-	const { ok, status } = result
-	const message = 'Error loading courses'
-	if (!ok) return { error: { status, message } }
-	const allCourses = await result.json()
-	const courses = allCourses.filter(({ ultraStatus }) => ultraStatus === 'Ultra')
-	return { courses }
-}
-
-const loadTerms = async () => {
-	const result = await fetch('/api/v1/terms')
-	const { ok, status } = result
-	const message = 'Error loading terms'
-	if (!ok) return { error: { status, message } }
-	const terms = await result.json()
-	return { terms }
-}
-
-const loadModules = async courseId => {
-	const result = await fetch(`/api/v1/courses/${courseId}/contents`)
-	const { ok, status } = result
-	const message = 'Error loading modules'
-	if (!ok) return { error: { status, message } }
-	const modules = await result.json()
-	return { modules }
-}
+import { loadCourses, loadTerms, loadModules } from './load-endpoints.module.js'
 
 const updateModuleTitle = async (courseId, moduleId, title) => {
 	const result = await fetch(`/api/v1/courses/${courseId}/contents/${moduleId}`, {

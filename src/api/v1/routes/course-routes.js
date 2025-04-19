@@ -1,7 +1,6 @@
 
 const router = require('express').Router()
 
-const authController = require('../controllers/auth-controller')
 const courseController = require('../controllers/course-controller')
 const studentController = require('../controllers/student-controller')
 const contentController = require('../controllers/content-controller')
@@ -21,17 +20,6 @@ router.get('/', authMiddleware, async (request, response) => {
 	const { courses, error } = await getCourses(accessToken)
 	if (error) return handleError(response, error)
 	response.json(courses)
-})
-
-router.post('/copy', authMiddleware, async (request, response) => {
-	const { accessToken } = request.session
-	const { getAccessToken } = authController
-	const { accessToken: adminToken } = await getAccessToken()
-	const { courseId, name } = request.body
-	const { startCourseCopy } = courseController
-	const result = await startCourseCopy(adminToken, accessToken, { courseId, name })
-	if (result.error) return handleError(response, result.error)
-	response.send(result)
 })
 
 router.get('/names', authMiddleware, async (request, response) => {
@@ -109,6 +97,5 @@ router.post('/:courseId/contents/:moduleId/scorms/add-link', authMiddleware, asy
 	if (error) return handleError(response, error)
 	response.json(contents)
 })
-
 
 module.exports = router

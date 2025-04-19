@@ -40,4 +40,8 @@ router.get('/term/upload', redirectIfNotAuthenticated, (_, response) => {
 	response.sendFile('term/upload.html', { root })
 })
 
+router.get('/term/course-copy', redirectIfNotAuthenticated, (_, response) => {
+	response.sendFile('term/course-copy.html', { root })
+})
+
 module.exports = router

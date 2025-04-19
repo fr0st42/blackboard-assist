@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Blackboard Assist Home</title>
+
+	<link rel="stylesheet" href="/styles/site.css">
+	<link rel="stylesheet" href="/styles/theme.css">
+
+	<script src="/scripts/theme.js" type="module"></script>
+	<script src="/scripts/course-copy.js" type="module"></script>
+</head>
+
+<body>
+	<aside>
+		<section id="theme-picker">
+			<button id="light-theme">
+				<img src="/images/theme/light.svg" alt="Light Theme">
+			</button>
+			<button id="system-theme">
+				<img src="/images/theme/system.svg" alt="System Theme">
+			</button>
+			<button id="dark-theme">
+				<img src="/images/theme/dark.svg" alt="Dark Theme">
+			</button>
+		</section>
+	</aside>
+	<main>
+		<h1>Course Copy Tool</h1>
+		<p>Use this tool to generate your course by copying content from another course.</p>
+		<div id="courses">
+			<div class="course">
+				<h2>C# Introduction to Programming (Section 2)</h2>
+				<p>10152111-2-2025spring</p>
+				<select>
+					<option value="course1">Course 1</option>
+					<option value="course2">Course 2</option>
+					<option value="course3">Course 3</option>
+				</select>
+				<button id="copy-course-12345">Copy</button>
+				<p class="error"></p>
+			</div>
+		</div>
+	</main>
+</body>
+
+</html>
