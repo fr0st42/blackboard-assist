@@ -10,6 +10,7 @@
 - [x] Frontend interface module rename
 - [x] Frontend interface for course copies
 - [x] Backend API for course copies
+- [x] Dont allow copy of existing course
 
 ## In Progress
 
